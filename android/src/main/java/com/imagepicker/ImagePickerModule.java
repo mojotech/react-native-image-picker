@@ -408,8 +408,10 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
         break;
 
       case REQUEST_LAUNCH_VIDEO_LIBRARY:
+        final String path = getRealPathFromURI(data.getData());
         responseHelper.putString("uri", data.getData().toString());
-        responseHelper.putString("path", getRealPathFromURI(data.getData()));
+        responseHelper.putString("path", path);
+        putExtraFileInfo(path, responseHelper);
         responseHelper.invokeResponse(callback);
         callback = null;
         return;
@@ -419,6 +421,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
         final String path = getRealPathFromURI(uri);
         responseHelper.putString("uri", uri.toString());
         responseHelper.putString("path", path);
+        putExtraFileInfo(path, responseHelper);
         fileScan(reactContext, path, uri);
         responseHelper.invokeResponse(callback);
         callback = null;
