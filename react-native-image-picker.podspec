@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "react-native-image-picker"
-  s.version      = "0.27.0"
+  s.version      = "0.28.0"
   s.license      = "MIT"
   s.homepage     = "https://github.com/marcshilling/react-native-image-picker"
   s.authors      = { 'Marc Shilling' => 'marcshilling@gmail.com', 'Craig P Jolicoeur' => 'craig@mojotech.com' }
