@@ -375,6 +375,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
     }
 
     Uri uri = null;
+    String realPath = null;
     switch (requestCode)
     {
       case REQUEST_LAUNCH_IMAGE_CAPTURE:
@@ -383,7 +384,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
 
       case REQUEST_LAUNCH_IMAGE_LIBRARY:
         uri = data.getData();
-        String realPath = getRealPathFromURI(uri);
+        realPath = getRealPathFromURI(uri);
         final boolean isUrl = !TextUtils.isEmpty(realPath) &&
                 Patterns.WEB_URL.matcher(realPath).matches();
         if (realPath == null || isUrl)
@@ -408,18 +409,22 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
         break;
 
       case REQUEST_LAUNCH_VIDEO_LIBRARY:
-        responseHelper.putString("uri", data.getData().toString());
-        responseHelper.putString("path", getRealPathFromURI(data.getData()));
+        uri = data.getData();
+        realPath = getRealPathFromURI(uri);
+        responseHelper.putString("uri", uri.toString());
+        responseHelper.putString("path", realPath);
+        putExtraFileInfo(realPath, responseHelper);
         responseHelper.invokeResponse(callback);
         callback = null;
         return;
 
       case REQUEST_LAUNCH_VIDEO_CAPTURE:
         uri = data.getData();
-        final String path = getRealPathFromURI(uri);
+        realPath = getRealPathFromURI(uri);
         responseHelper.putString("uri", uri.toString());
-        responseHelper.putString("path", path);
-        fileScan(reactContext, path, uri);
+        responseHelper.putString("path", realPath);
+        fileScan(reactContext, realPath, uri);
+        putExtraFileInfo(realPath, responseHelper);
         responseHelper.invokeResponse(callback);
         callback = null;
         return;
