@@ -274,9 +274,9 @@ origURL | OK | - | The URL of the original asset in photo library, if it exists
 isVertical | OK | OK | Will be true if the image is vertically oriented
 width | OK | OK | Image dimensions (photos only)
 height | OK | OK | Image dimensions (photos only)
-fileSize | OK | OK | The file size (photos only)
+fileSize | OK | OK | The file size
 type | - | OK | The file type (photos only)
-fileName | OK (photos and videos) | OK (photos) | The file name
+fileName | OK | OK | The file name
 path | - | OK | The file path
 latitude | OK | OK | Latitude metadata, if available
 longitude | OK | OK | Longitude metadata, if available
